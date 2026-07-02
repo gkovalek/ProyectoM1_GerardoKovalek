@@ -18,3 +18,36 @@ function hslToHex(h, s, l) {
   const [r, g, b] = rgb.match(/\d+/g).map(Number);
   return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
 }
+
+const generateBtn = document.getElementById('generate-btn');
+const sizeSelect = document.getElementById('palette-size');
+const paletteContainer = document.getElementById('palette');
+
+function createSwatch(hexColor) {
+  const swatch = document.createElement('div');
+  swatch.className = 'color-swatch';
+  swatch.style.backgroundColor = hexColor;  
+
+  const code = document.createElement('span');
+  code.className = 'color-code';
+  code.textContent = hexColor;               
+
+  swatch.appendChild(code);
+  return swatch;
+}
+
+function renderPalette(size) {
+  paletteContainer.innerHTML = '';
+
+  for (let i = 0; i < size; i++) {
+    const hsl = generateRandomHSL();              
+    const hex = hslToHex(hsl.h, hsl.s, hsl.l);      
+    const swatch = createSwatch(hex);           
+    paletteContainer.appendChild(swatch);
+  }
+}
+
+generateBtn.addEventListener('click', () => {
+  const size = parseInt(sizeSelect.value);
+  renderPalette(size);
+});
