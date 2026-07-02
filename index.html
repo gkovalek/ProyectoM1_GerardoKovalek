@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Paletas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Generador de Paletas de Colores</h1>
+    <p>A través de un click genera paletas de colores aleatorias</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <label for="palette-size">Tamaño de Paleta</label>
+      <select id="palette-size">
+        <option value="6">6 colores</option>
+        <option value="8">8 colores</option>
+        <option value="9">9 colores</option>
+      </select>
+      <button id="generate-btn" type="button">Generar Paleta</button>
+    </div>
+
+    <section id="palette">
+    </section>
+  </main>
+
+  <footer>
+    <p>Proyecto Integrador M1 - Full Stack - Gerardo Kovalek</p>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
