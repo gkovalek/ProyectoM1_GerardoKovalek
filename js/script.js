@@ -3,10 +3,10 @@ function getRandomInt(min, max) {
 }
 
 function generateRandomHSL() {
-const h = getRandomInt(0, 360);
-const s = getRandomInt(60, 90);
-const l = getRandomInt(45, 65);
-return { h: h, s: s, l: l };  
+  const h = getRandomInt(0, 360);
+  const s = getRandomInt(60, 90);
+  const l = getRandomInt(45, 65);
+  return { h: h, s: s, l: l };
 }
 
 function hslToHex(h, s, l) {
@@ -23,14 +23,26 @@ const generateBtn = document.getElementById('generate-btn');
 const sizeSelect = document.getElementById('palette-size');
 const paletteContainer = document.getElementById('palette');
 
+const toast = document.getElementById('toast');
+let toastTimeout;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
+}
+
 function createSwatch(hexColor) {
   const swatch = document.createElement('div');
   swatch.className = 'color-swatch';
-  swatch.style.backgroundColor = hexColor;  
+  swatch.style.backgroundColor = hexColor;
 
   const code = document.createElement('span');
   code.className = 'color-code';
-  code.textContent = hexColor;               
+  code.textContent = hexColor;
 
   swatch.appendChild(code);
   return swatch;
@@ -40,9 +52,9 @@ function renderPalette(size) {
   paletteContainer.innerHTML = '';
 
   for (let i = 0; i < size; i++) {
-    const hsl = generateRandomHSL();              
-    const hex = hslToHex(hsl.h, hsl.s, hsl.l);      
-    const swatch = createSwatch(hex);           
+    const hsl = generateRandomHSL();
+    const hex = hslToHex(hsl.h, hsl.s, hsl.l);
+    const swatch = createSwatch(hex);
     paletteContainer.appendChild(swatch);
   }
 }
@@ -50,4 +62,5 @@ function renderPalette(size) {
 generateBtn.addEventListener('click', () => {
   const size = parseInt(sizeSelect.value);
   renderPalette(size);
+  showToast('¡Paleta generada!');
 });
